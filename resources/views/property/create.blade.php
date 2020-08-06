@@ -22,8 +22,9 @@
             <label for="preco_venda">Preço de Venda: </label>
             <input type="number" name="preco_venda" id="preco_venda" class="form-control" ><br>
 
-            <button type="submit" class="btn btn-primary">Salvar</button>
+            <button type="submit" class="btn btn-primary" style="margin: 10px">Salvar</button>
 
+            <a href="{{ url("/imoveis") }}"> <input  type="button" value="Voltar" class="btn btn-secondary"  style="margin: 10px" /> </a>
         </div>
     </form>
 @endsection
