@@ -24,7 +24,9 @@
 
             <button type="submit" class="btn btn-primary" style="margin: 10px">Salvar</button>
 
-            <a href="{{ url("/imoveis") }}"> <input  type="button" value="Voltar" class="btn btn-secondary"  style="margin: 10px" /> </a>
+            <button  type="reset" class="btn btn-primary"  style="margin: 10px" >Limpar</button>
+
+            <a href="{{ url("/imoveis") }}"> <input  type="button" value="Voltar" class="btn btn-info"  style="margin: 10px" /> </a>
         </div>
     </form>
 @endsection

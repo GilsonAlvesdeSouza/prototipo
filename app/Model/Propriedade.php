@@ -4,7 +4,7 @@ namespace LaraDev\Model;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Property extends Model
+class Propriedade extends Model
 {
 
     protected $table = "proprieties";

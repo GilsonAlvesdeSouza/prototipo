@@ -5,6 +5,7 @@
 @endsection
 
 @section("conteudo")
+
     <a href="{{url("/imoveis/novo")}}" class="btn btn-primary">Adicionar</a>
 
     <table class="table table-striped">
@@ -18,9 +19,11 @@
         </tr>
         </thead>
         <tbody>
+
         @if(!empty($propriedades))
             @foreach($propriedades as $propriedade)
                 <tr>
+
                     @php
                         $linkVermais = url('/imoveis/' . $propriedade->uri);
                         $linkEditar = url('/imoveis/editar/' . $propriedade->uri);
@@ -29,8 +32,8 @@
 
                     <td>{{$propriedade->titulo}}</td>
                     <td>{{$propriedade->descricao}}</td>
-                    <td>{{ app(LaraDev\Http\Controllers\PropertyController::class)->formatarMoeda($propriedade->preco_rentavel)}}</td>
-                    <td>{{ app(LaraDev\Http\Controllers\PropertyController::class)->formatarMoeda($propriedade->preco_venda)}}</td>
+                    <td>{{ app(LaraDev\Http\Controllers\propriedadeController::class)->formatarMoeda($propriedade->preco_rentavel)}}</td>
+                    <td>{{ app(LaraDev\Http\Controllers\propriedadeController::class)->formatarMoeda($propriedade->preco_venda)}}</td>
                     <td><a title="Ver Mais" href="{{ $linkVermais }}" style="padding: 2px; margin: 10px">
                             <svg width="1.5em" height="1.5em" viewBox="0 0 16 16" class="bi bi-binoculars" fill="black"
                                  xmlns="http://www.w3.org/2000/svg">
@@ -58,6 +61,13 @@
                 </tr>
             @endforeach
         @endif
+
+         @if(empty($propriedades))
+            <tr>
+                <td>{{ "Nenhum registro encontrado!..." }}</td>
+            </tr>
+        @endif
+
         </tbody>
     </table>
 

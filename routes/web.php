@@ -12,17 +12,17 @@
 */
 
 Route::get('/', function () {
-    return redirect()->action('PropertyController@index');
+    return redirect()->action('propriedadeController@index');
 });
 
-Route::get('/imoveis', 'PropertyController@index');
+Route::get('/imoveis', 'propriedadeController@index');
 
-Route::get('/imoveis/novo', 'PropertyController@create');
-Route::post('/imoveis/salvar', 'PropertyController@salvar');
+Route::get('/imoveis/novo', 'propriedadeController@create');
+Route::post('/imoveis/salvar', 'propriedadeController@salvar');
 
-Route::get('/imoveis/{uri}', 'PropertyController@listar');
+Route::get('/imoveis/{uri}', 'propriedadeController@listar');
 
-Route::get('/imoveis/editar/{uri}', 'PropertyController@editar');
-Route::put('/imoveis/alterar/{uri}','PropertyController@alterar');
+Route::get('/imoveis/editar/{uri}', 'propriedadeController@editar');
+Route::put('/imoveis/alterar/{uri}','propriedadeController@alterar');
 
-Route::get('/imoveis/excluir/{uri}','PropertyController@excluir');
+Route::get('/imoveis/excluir/{uri}','propriedadeController@excluir');

@@ -5,9 +5,9 @@ namespace LaraDev\Http\Controllers;
 
 use Illuminate\Http\Request;
 use LaraDev\Http\Controllers\Controller;
-use LaraDev\Model\Property;
+use LaraDev\Model\Propriedade;
 
-class PropertyController extends Controller
+class propriedadeController extends Controller
 {
     /**
      * Função que lista todas as Propriedades
@@ -16,9 +16,9 @@ class PropertyController extends Controller
      */
     public function index()
     {
-        $propiedades = Property::all();
+        $propiedades = Propriedade::all();
         $titulo = "Lista Propriedade";
-        return view("property.index", [
+        return view("propriedade.index", [
             "propriedades" => $propiedades,
             "titulo" => $titulo,
         ]);
@@ -32,16 +32,16 @@ class PropertyController extends Controller
      */
     public function listar($uri)
     {
-        $property = Property::where('uri', $uri)->first();
+        $propriedade = Propriedade::where('uri', $uri)->first();
 
         $titulo = "Propriedade";
-        if (!empty($property)) {
-            return view("property/listar", [
-                "propriedade" => $property,
+        if (!empty($propriedade)) {
+            return view("propriedade/listar", [
+                "propriedade" => $propriedade,
                 "titulo" => $titulo,
             ]);
         } else {
-            return redirect()->action('PropertyController@Index');
+            return redirect()->action('propriedadeController@Index');
         }
     }
 
@@ -53,7 +53,7 @@ class PropertyController extends Controller
     public function create()
     {
         $titulo = "Cadastro de Propriedade";
-        return view("property.create", [
+        return view("propriedade.create", [
             "titulo" => $titulo
         ]);
     }
@@ -68,52 +68,63 @@ class PropertyController extends Controller
     {
         $propriedade = $this->novo($request);
 
-        $propriedade->save();
+        Propriedade::create($propriedade);
 
-        return redirect()->action('PropertyController@index');
+        return redirect()->action('propriedadeController@index');
     }
 
     public function editar($uri)
     {
-        $property = Property::where('uri', $uri)->first();
+        $propriedade = Propriedade::where('uri', $uri)->first();
 
         $titulo = "Editar Propriedade";
-        if (!empty($property)) {
-            return view("property/editar", [
-                "propriedade" => $property,
+        if (!empty($propriedade)) {
+            return view("propriedade/editar", [
+                "propriedade" => $propriedade,
                 "titulo" => $titulo,
             ]);
         } else {
-            return redirect()->action('PropertyController@Index');
+            return redirect()->action('propriedadeController@Index');
         }
     }
 
     public function alterar(Request $request, $id)
     {
         $propriedadeSlug = $this->setUri($request->titulo);
-        $property = Property::where('id', $id)->first();
 
-        $property->titulo = $request->titulo;
-        $property->uri = $propriedadeSlug;
-        $property->descricao = $request->descricao;
-        $property->preco_rentavel = $request->preco_rentavel;
-        $property->preco_venda = $request->preco_venda;
+        $propriedade = Propriedade::find($id);
 
-        $property->save();
+        $propriedade->titulo = $request->titulo;
+        $propriedade->uri = $propriedadeSlug;
+        $propriedade->descricao = $request->descricao;
+        $propriedade->preco_rentavel = $request->preco_rentavel;
+        $propriedade->preco_venda = $request->preco_venda;
 
-        return redirect()->action('PropertyController@index');
+        $propriedade->save();
+
+        return redirect()->action('propriedadeController@index');
     }
 
     public function excluir($uri)
     {
-        $property = Property::where('uri', $uri)->first();
+        $propriedade = Propriedade::where('uri', $uri)->first();
 
-        if(!empty($property)){
-            $property->delete();
+        if(!empty($propriedade)){
+            $propriedade->delete();
         }
 
-        return redirect()->action('PropertyController@index');
+        return redirect()->action('propriedadeController@index');
     }
+
+//    public function limparCampos(Request $request)
+//    {
+//        $request->titulo = "";
+//        $request->descricao = "";
+//        $request->preco_rentavel = "";
+//        $request->preco_venda = "";
+//
+//
+//    }
 
     public function formatarMoeda($valor)
     {
@@ -124,19 +135,27 @@ class PropertyController extends Controller
      * Função para criar uma nova propriedade
      *
      * @param $request
-     * @return Property
+     * @return Propriedade
      */
     private function novo($request)
     {
         $propriedadeSlug = $this->setUri($request->titulo);
 
-        $propriedade = new Property();
+        $propriedade = new Propriedade();
 
-        $propriedade->titulo = $request->titulo;
-        $propriedade->uri = $propriedadeSlug;
-        $propriedade->descricao = $request->descricao;
-        $propriedade->preco_rentavel = $request->preco_rentavel;
-        $propriedade->preco_venda = $request->preco_venda;
+//        $propriedade->titulo = $request->titulo;
+//        $propriedade->uri = $propriedadeSlug;
+//        $propriedade->descricao = $request->descricao;
+//        $propriedade->preco_rentavel = $request->preco_rentavel;
+//        $propriedade->preco_venda = $request->preco_venda;
+
+        $propriedade = [
+          'titulo' =>  $request->titulo,
+          'uri' =>  $propriedadeSlug,
+          'descricao' =>  $request->descricao,
+          'preco_rentavel' =>  $request->preco_rentavel,
+          'preco_venda' =>  $request->preco_venda,
+        ];
 
         return $propriedade;
     }
@@ -151,7 +170,7 @@ class PropertyController extends Controller
     {
         $propriedadeSlug = str_slug($parametro);
 
-        $propriedades = Property::all();
+        $propriedades = Propriedade::all();
 
         $i = 0;
 
