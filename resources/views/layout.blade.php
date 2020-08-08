@@ -9,17 +9,18 @@
     <link href="{{asset('css/app.css')}}" rel="stylesheet">
 </head>
 <body>
-<div class="container">
-    <nav class="navbar navbar-expand-md navbar-dark bg-dark">
-        <ul class="navbar ml-auto" >
-            <li>Home</li>
-            <li>Sobre</li>
-            <li>Sair</li>
+<nav class="navbar navbar-expand-md navbar-dark bg-dark">
+    <div class="container">
+
+        <ul class="navbar-nav ml-auto">
+            <li class="nav-item">
+                <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
+            </li>
         </ul>
-    </nav>
-</div>
-<div class="container">
-    <div class="jumbotron">
+    </div>
+</nav>
+<div class="container my-2">
+    <div class="bg-primary text-white text-center">
         <h1>@yield("cabecalho")</h1>
     </div>
 

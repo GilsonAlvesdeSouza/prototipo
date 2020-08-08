@@ -8,8 +8,8 @@
 
     <a href="{{url("/imoveis/novo")}}" class="btn btn-primary">Adicionar</a>
 
-    <table class="table table-striped">
-        <thead>
+    <table class="table table-striped table-hover my-3">
+        <thead class="bg-primary text-white" >
         <tr>
             <th scope="col">Titulo</th>
             <th scope="col">Descricao</th>
